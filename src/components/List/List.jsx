@@ -5,22 +5,13 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import useStyles from './styles.js';
 import { Rating } from '@material-ui/lab';
 
-const List = () => {
+const List = ({places}) => {
 
     const classes = useStyles();
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('restaurants');
  
-    const places = [
-        {name: 'Cool Place'},
-        {name: 'Best Beer'},
-        {name: 'Best Steak'},
-        {name: 'Cool Place'},
-        {name: 'Cool Place'},
-        {name: 'Cool Place'},
-        {name: 'Cool Place'},
-        {name: 'Cool Place'},
-    ]
+
     return(
         <div className={classes.container}>
            <Typography variant="h4">Restaurants, Hotels & Attractions around you</Typography>
