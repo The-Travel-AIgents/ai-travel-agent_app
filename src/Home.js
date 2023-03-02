@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
     <Layout>
-      <main>
+      <div>
         <div class="bg-indigo-700 sm:py-20">
           <div class="max-w-3xl mx-auto text-center py-44 px-4 sm:py-32 sm:px-6 lg:px-8">
             <h2 class="text-3xl tracking-tight font-bold text-white sm:text-4xl sm:tracking-tight">
@@ -20,7 +20,7 @@ const Home = () => {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
     </Layout>
     </>
   )
