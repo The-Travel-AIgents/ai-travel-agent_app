@@ -6,15 +6,18 @@ import Layout from "./Layout";
 const App = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [result, setResult] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (data) => {
-  
+    setIsLoading(true);
+
     data.activities = data.activities.split(',')
     data.dates_and_places = data.dates_and_places.split(',')
     const response = await axios.post('http://localhost:8000/api/guide', data);
     console.log(response.data)
 
     setResult(response.data.data);
+    setIsLoading(false);
   }
 
   return (
@@ -23,14 +26,50 @@ const App = () => {
         <div className="flex justify-center">
           {result
             ?
-            <div>
-              Here is your travel guide.
-              <p>Destination: {result.trip.destination}</p>
+            <div className="w-full lg:w-2/3 my-10">
+              <h2 className="text-2xl text-center font-medium mb-3">Your {result.trip.destination} travel guide.</h2>
               <p>Start date: {result.trip.start_date}</p>
               <p>End date: {result.trip.end_date}</p>
               {result.trip.city_itinerary.map((item, index) => (
-                <div>
-                  <h3>Day {index + 1}</h3>
+                <div className="my-5">
+                  <h3 className="text-lg font-medium">Day {index + 1}</h3>
+                  <div className="border border-gray-300 py-5 px-3 rounded-lg">
+                    <p className="my-2"><b>City:</b> {item.city}</p>
+                    <p className="my-2"><b>Date:</b>  {item.date}</p>
+                    <p className="my-2"><b>Area to stay:</b> {item.area_to_stay}</p>
+                    <div className="my-2">
+                      <b>Hotel recommendation:</b>
+                      <ul className="list-disc list-inside">
+                        <li>Name: {item.hotel_recommendation.name}</li>
+                        <li>Rating: {item.hotel_recommendation.rating}</li>
+                        <li>Location: {item.hotel_recommendation.location}</li>
+                        <li>Website: 
+                          <a href={item.hotel_recommendation.contact.website} className="undeline text-indigo-500"> Click here</a>
+                        </li>
+                        <li>Email address: 
+                          <a href={"mailto:" + item.hotel_recommendation.contact.email} className="undeline text-indigo-500"> {item.hotel_recommendation.contact.email}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="my-2">
+                      <b>Activities</b>
+                      <div className="flex justify-between mt-2 px-2 border border-gray-300">
+                        <p className="w-2/6">Activity</p>
+                        <p className="w-3/6">Location</p>
+                        <p className="w-28">Start time</p>
+                        <p className="w-28">End time</p>
+                      </div>
+                      {item.activities.map(activity => (
+                        <div className="flex justify-betwen py-2 px-2 border-b border-x border-gray-300">
+                          <p className="w-2/6">{activity.name}</p>
+                          <p className="w-3/6">{activity.location}</p>
+                          <p className="w-28">{activity.start_time}</p>
+                          <p className="w-28">{activity.end_time}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
                 </div>
               ))}
             </div>
@@ -380,10 +419,12 @@ const App = () => {
               </div>
               <button
                 type="submit"
-                class="inline-flex my-3 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="inline-flex disabled:opacity-50 my-3 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                disabled={isLoading}
               >
                 Explore
               </button>
+              <span className="text-blue-500">{isLoading && " Fetching data. This might take a minute..."}</span>
             </form>
           }
         </div>
