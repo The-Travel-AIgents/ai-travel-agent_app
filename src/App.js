@@ -23,7 +23,7 @@ const App = () => {
   return (
     <>
       <Layout>
-        <div className="flex justify-center">
+        <div className="flex justify-center bg-[url('./image/background.png')] bg-contain bg-no-repeat bg-right">
           {result
             ?
             <div className="w-full lg:w-2/3 my-10">
