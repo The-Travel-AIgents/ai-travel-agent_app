@@ -372,28 +372,6 @@ const App = () => {
                 {errors.duration && <span className="text-red-500 text-sm">This field is required</span>}
               </div>
               <div className="my-3">
-                <label for="start_time" class="block font-medium text-gray-700 text-base">
-                  What time do you want to start your day?
-                </label>
-                <input
-                  {...register("start_time", { required: true })}
-                  type="time"
-                  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 block w-full sm:text-sm border py-1 border-gray-300 rounded-md"
-                />
-                {errors.start_time && <span className="text-red-500 text-sm">This field is required</span>}
-              </div>
-              <div className="my-3">
-                <label for="end_time" class="block font-medium text-gray-700 text-base">
-                  What time do you want to end your day?
-                </label>
-                <input
-                  {...register("end_time", { required: true })}
-                  type="time"
-                  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 block w-full sm:text-sm border py-1 border-gray-300 rounded-md"
-                />
-                {errors.end_time && <span className="text-red-500 text-sm">This field is required</span>}
-              </div>
-              <div className="my-3">
                 <label for="activities" class="block font-medium text-gray-700 text-base">
                   Activites you'd like to try? (comma separated)
                 </label>
