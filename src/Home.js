@@ -48,7 +48,7 @@ const Home = () => {
             </Link>
           </div>
           <div className="flex justify-center">
-            <img src={image} alt="Travel AIgent" className="max-h-full" />
+          <img src={image} alt="Travel AIgent" className="max-h-full rounded-md" />
           </div>
         </div>
       </div>
