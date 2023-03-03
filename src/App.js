@@ -7,23 +7,30 @@ const App = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const onSubmit = async (data) => {
     setIsLoading(true);
+    setError('')
 
     data.activities = data.activities.split(',')
     data.dates_and_places = data.dates_and_places.split(',')
     const response = await axios.post('https://travel-aigent.onrender.com/api/guide', data);
-    console.log(response.data)
 
-    setResult(response.data.data);
+    if (response.status === 200) {
+      setResult(response.data.data);
+    } else if (response.status === 400) {
+      setError(response.data.message)
+    } else {
+      setError('Error occured! Please try again.')
+    }
     setIsLoading(false);
   }
 
   return (
     <>
       <Layout>
-        <div className="flex justify-center bg-[url('./image/background.png')] bg-contain bg-no-repeat bg-right">
+        <div className={"flex justify-center " + (result ? "" : " bg-[url('./image/background.png')] ") + "bg-contain bg-no-repeat bg-right"}>
           {result
             ?
             <div className="w-full lg:w-2/3 my-10">
@@ -403,6 +410,7 @@ const App = () => {
                 Explore
               </button>
               <span className="text-blue-500">{isLoading && " Fetching data. This might take a minute..."}</span>
+              <span className="text-red-500">{error}</span>
             </form>
           }
         </div>
