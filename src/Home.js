@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from './Layout';
-import image from './image/image.PNG';
+
+// import background from './image/background.png'
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -31,24 +32,20 @@ const Home = () => {
   return (
     <Layout>
       <div className="bg-indigo-700 sm:py-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-10 sm:py-32 sm:px-6 lg:px-8">
-          <div className="flex flex-col justify-center text-center">
-            <h2 className="text-3xl tracking-tight font-bold text-white sm:text-4xl sm:tracking-tight">
+        <div className="max-w-7xl mx-auto sm:py-32 sm:px-6 lg:px-8 bg-[url('./image/background.png')] bg-center bg-contain bg-no-repeat">
+          <div className="flex flex-col justify-center items-center text-center">
+            <h2 className="text-3xl tracking-tight font-bold text-white sm:text-5xl sm:tracking-tight">
               <span className="block">Welcome to Travel AIgent.</span>
             </h2>
             <p className="mt-4 text-lg leading-6 text-indigo-200 py-3">
-              An AI application that helps you plan and schedule your travel.
+              A travel agent powered by AI that helps you <br/> plan and schedule your trips using natural language
             </p>
             <Link
               to="/app"
-              className="mt-8 inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-700 sm:w-auto"
-
+              className="mt-8 inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-300"
             >
               Try it Out!
             </Link>
-          </div>
-          <div className="flex justify-center">
-          <img src={image} alt="Travel AIgent" className="max-h-full rounded-md" />
           </div>
         </div>
       </div>
