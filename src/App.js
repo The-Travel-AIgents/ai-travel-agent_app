@@ -13,7 +13,7 @@ const App = () => {
 
     data.activities = data.activities.split(',')
     data.dates_and_places = data.dates_and_places.split(',')
-    const response = await axios.post('http://localhost:8000/api/guide', data);
+    const response = await axios.post('https://travel-aigent.onrender.com/api/guide', data);
     console.log(response.data)
 
     setResult(response.data.data);
